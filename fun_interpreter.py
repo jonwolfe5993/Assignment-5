@@ -12,6 +12,7 @@ def interpret(filename):
             if "\"" in print_text:
                 print_text = print_text.replace("\"","")
                 print(print_text)
+            #maybe put into it's own function etc.
             elif "+" in line:
                 definition = print_text.split("+")
                 var1 = definition[0].replace(" ","")
@@ -20,6 +21,50 @@ def interpret(filename):
                     num1 = int(s[var1])
                     num2 = int(s[var2])
                     val = num1 + num2
+                    print(val)
+                except KeyError:
+                    print("Variable(s) not defined")
+            elif "-" in line:
+                definition = print_text.split("-")
+                var1 = definition[0].replace(" ","")
+                var2 = definition[1].replace(" ","")
+                try:
+                    num1 = int(s[var1])
+                    num2 = int(s[var2])
+                    val = num1 - num2
+                    print(val)
+                except KeyError:
+                    print("Variable(s) not defined")
+            elif "*" in line:
+                definition = print_text.split("*")
+                var1 = definition[0].replace(" ","")
+                var2 = definition[1].replace(" ","")
+                try:
+                    num1 = int(s[var1])
+                    num2 = int(s[var2])
+                    val = num1 * num2
+                    print(val)
+                except KeyError:
+                    print("Variable(s) not defined")
+            elif "/" in line:
+                definition = print_text.split("/")
+                var1 = definition[0].replace(" ","")
+                var2 = definition[1].replace(" ","")
+                try:
+                    num1 = int(s[var1])
+                    num2 = int(s[var2])
+                    val = num1 / num2
+                    print(val)
+                except KeyError:
+                    print("Variable(s) not defined")
+            elif "%" in line:
+                definition = print_text.split("%")
+                var1 = definition[0].replace(" ","")
+                var2 = definition[1].replace(" ","")
+                try:
+                    num1 = int(s[var1])
+                    num2 = int(s[var2])
+                    val = num1 % num2
                     print(val)
                 except KeyError:
                     print("Variable(s) not defined")
