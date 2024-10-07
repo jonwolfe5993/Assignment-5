@@ -6,9 +6,7 @@ def interpret(filename):
         if line.startswith("let "):
             definition = line.split("let ")[1]
             var, val = definition.split("=")
-            var = var.replace(" ","").replace("\n","")
-            val = val.replace(" ","").replace("\n","")
-            s[var] = val
+            s[var] = decidevalue(line, s)
         elif line.startswith("print("):
             print_text = line.split("print")[1].replace("(","").replace(")","").replace("\n","")
             if "\"" in print_text:
@@ -33,72 +31,69 @@ def interpret(filename):
                 except KeyError:
                     print("Variable(s) not defined")
 
-
-        #Splits line if it sees = and *
-        if "=" in line and "*" in line:
-            definition = line.split("=")[1]
-            nums = definition.split("*")
-            if len(nums) == 2:
-                num1 = nums[0].strip()
-                num2 = nums[1].strip()
-                #Calls multiply function and stores result
-                result = multiply(num1, num2, s)
-                var_name = line.split("=")[0].replace("let ","").strip()
-                s[var_name] = result
-
-        #Splits line if it sees = and /
-        if "=" in line and "/" in line:
-            definition = line.split("=")[1]
-            nums = definition.split("/")
-            if len(nums) == 2:
-                num1 = nums[0].strip()
-                num2 = nums[1].strip()
-                #Calls divide function and stores result
-                result = divide(num1, num2, s)
-                var_name = line.split("=")[0].replace("let ","").strip()
-                s[var_name] = result
-
-        #Splits line if it sees = and +
-        if "=" in line and "+" in line:
-            definition = line.split("=")[1]
-            nums = definition.split("+")
-            if len(nums) == 2:
-                num1 = nums[0].strip()
-                num2 = nums[1].strip()
-                #Calls addition function and stores result
-                result = addition(num1, num2, s)
-                var_name = line.split("=")[0].replace("let ","").strip()
-                s[var_name] = result
-
-        #Splits line if it sees = and -
-        if "=" in line and "-" in line:
-            definition = line.split("=")[1]
-            nums = definition.split("-")
-            if len(nums) == 2:
-                num1 = nums[0].strip()
-                num2 = nums[1].strip()
-                #Calls subtraction function and stores result
-                result = subtraction(num1, num2, s)
-                var_name = line.split("=")[0].replace("let ","").strip()
-                s[var_name] = result
-                
-        #Splits a line if it sees = and %
-        if "=" in line and "%" in line:
-            definition = line.split("=")[1]
-            nums = definition.split("%")
-            if len(nums) == 2:
-                num1 = nums[0].strip()
-                num2 = nums[1].strip()
-                #Calls modulo function and stores result
-                result = modulo(num1, num2, s)
-                var_name = line.split("=")[0].replace("let ","").strip()
-                s[var_name] = result
-
-
-def decidemath(definition, s):
-    return
-
-
+def decidevalue(line, s):
+    if "+" in line:
+        definition = line.split("=")[1]
+        nums = definition.split("+")
+        if len(nums) == 2:
+            num1 = nums[0].strip()
+            num2 = nums[1].strip()
+            #Calls addition function and stores result
+            result = addition(num1, num2, s)
+            var_name = line.split("=")[0].replace("let ","").strip()
+            s[var_name] = result
+        return s[var_name]
+    elif "-" in line:
+        definition = line.split("=")[1]
+        nums = definition.split("-")
+        if len(nums) == 2:
+            num1 = nums[0].strip()
+            num2 = nums[1].strip()
+            #Calls subtraction function and stores result
+            result = subtraction(num1, num2, s)
+            var_name = line.split("=")[0].replace("let ","").strip()
+            s[var_name] = result    
+        return s[var_name]
+    elif "*" in line:
+        definition = line.split("=")[1]
+        nums = definition.split("*")
+        if len(nums) == 2:
+            num1 = nums[0].strip()
+            num2 = nums[1].strip()
+            #Calls multiply function and stores result
+            result = multiply(num1, num2, s)
+            var_name = line.split("=")[0].replace("let ","").strip()
+            s[var_name] = result
+        return s[var_name]
+    elif "/" in line:
+        definition = line.split("=")[1]
+        nums = definition.split("/")
+        if len(nums) == 2:
+            num1 = nums[0].strip()
+            num2 = nums[1].strip()
+            #Calls divide function and stores result
+            result = divide(num1, num2, s)
+            var_name = line.split("=")[0].replace("let ","").strip()
+            s[var_name] = result
+        return s[var_name]
+    elif "%" in line:
+        definition = line.split("=")[1]
+        nums = definition.split("%")
+        if len(nums) == 2:
+            num1 = nums[0].strip()
+            num2 = nums[1].strip()
+            #Calls modulo function and stores result
+            result = modulo(num1, num2, s)
+            var_name = line.split("=")[0].replace("let ","").strip()
+            s[var_name] = result
+        return s[var_name]
+    else:
+        definition = line.split("let ")[1]
+        var, val = definition.split("=")
+        var = var.replace(" ","").replace("\n","")
+        val = val.replace(" ","").replace("\n","")
+        s[var] = val
+    return s[var]
 
 #Handles multiplication computation
 def multiply(var1, var2, s):
