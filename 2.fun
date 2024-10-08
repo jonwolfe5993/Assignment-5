@@ -1,4 +1,4 @@
-let a = 3
+let  a = 3
 let b = 12
 let c = 5
 let d = 2
@@ -16,5 +16,5 @@ print(f)
 print(g)
 print(h)
 print(i)
-print(a % b)
 print()
+print(a + b)
