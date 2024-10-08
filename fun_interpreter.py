@@ -41,7 +41,7 @@ def doIfStatement(line, s):
     if 'else:' in line:
         else_action = line[line.index('else:') + len('else:'):line.index(';')].strip()
 
-    # Evaluate the condition
+    #Evaluate the condition
     if evalExpression(condition, s):
         evalAction(action, s)
     elif else_action:
