@@ -1,4 +1,4 @@
-let  a = 3
+let a = 12
 let b = 12
 let c = 5
 let d = 2
@@ -16,5 +16,7 @@ print(f)
 print(g)
 print(h)
 print(i)
-print()
-print(a + b)
+print(s)
+
+if: b == a, print("b is equal to a"). else: print("b is not equal to a");
+
