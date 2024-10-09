@@ -16,7 +16,5 @@ print(f)
 print(g)
 print(h)
 print(i)
-print(s)
 
-if: b == a, print("b is equal to a"). else: print("b is not equal to a");
-
+if: b > a, print("b is greater than a"). else: print("b is less than or equal to a");

@@ -1,14 +1,15 @@
 def interpret(filename):
     file = open(filename)
     s = dict()
+    inIfStatement  = False #Used to detect when beginning if statement
+    if_block = [] #Stores block of if statement
     counter = 1
 
     for line in file.readlines():
-        line = line.replace("\n","")
+        line = line.replace("\n","") #break this out into a function
         if not line.strip():
             counter += 1
             continue
-
         if line.startswith("let "):
             definition = line.split("let ")[1].replace(" ","")
             var, val = definition.split("=")
@@ -71,9 +72,9 @@ def evalExpression(val, s):
         return parseString(val, "/", s)
     elif "%" in val:
         return parseString(val, "%", s)
-    elif "<" in val:
-        return parseString(val, "<=", s)
     elif "<=" in val:
+        return parseString(val, "<=", s)
+    elif "<" in val:
         return parseString(val, "<", s)
     elif ">=" in val:
         return parseString(val, ">=", s)
